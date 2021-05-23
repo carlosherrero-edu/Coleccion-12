@@ -1,22 +1,30 @@
-package punto;
+package puntobinario;
 
 import java.io.Serializable;
 
+/**
+ * Clase bÃ¡sica para modelar un punto en el plano
+ * Implementa la interfaz Serializable para permitir su almacenamiento en fichero
+ * @author Carlos Herrero
+ *
+ */
 public class Punto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	// propiedades
 	private int coordX;
 	private int coordY;
 	private String color;
 
-	// constructor
+	// constructor Ãºnico
 	public Punto(int x, int y, String color) {
 		this.coordX = x;
 		this.coordY = y;
 		this.color = color;
 	}
-
+	
+	//mÃ©todos getXxX y setXxX
 	public int getCoordX() {
 		return this.coordX;
 	}
@@ -31,7 +39,7 @@ public class Punto implements Serializable {
 
 	@Override
 	public String toString() {
-		return " Posición x:  " + getCoordX() + " --Posición y " + getCoordY() + "--Color: " + getColor();
+		return " Posiciï¿½n x:  " + getCoordX() + " --Posiciï¿½n y " + getCoordY() + "--Color: " + getColor();
 	}
 
 }
