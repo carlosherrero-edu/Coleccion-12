@@ -10,14 +10,14 @@ public class PruebasUtilidadesFicheros {
 		
 	
 		
-		UtilidadesFicheros.imprimirLineasFichero(ruta+"/"+fich);
+		//UtilidadesFicheros.imprimirLineasFichero(ruta+"/"+fich);
 		System.out.println();
 		UtilidadesFicheros.head(ruta+"/"+fich);
 		System.out.println();
 		UtilidadesFicheros.tail(ruta+"/"+fich);
 		System.out.println();
 	
-		UtilidadesFicheros.grep("gitano", new File(ruta));
+		//UtilidadesFicheros.grep("gitano", new File(ruta));
 		
 		
 		

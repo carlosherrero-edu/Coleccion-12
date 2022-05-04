@@ -1,6 +1,9 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.io.FileReader;
+
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
@@ -61,6 +64,60 @@ public class UtilidadesFicheros {
 	 * @param numLineas  entero con el numero de lineas que queremos imprimir -debe ser positivo-
 	 */
 
+	public static void head2(String ruta, int numLineas) {
+
+		// validamos lineas
+		if (numLineas <= 0) {
+			throw new IllegalArgumentException("El n�mero de l�neas debe ser mayor de 0");
+		}
+
+		// primero tratamos de abrir el manejador del fichero
+		File fichero;
+		try {
+			fichero = new File(ruta);
+		} catch (Exception e) {
+			// la ruta no es correcta o no existe el fichero.salimos del m�todo
+			return;
+		}
+
+		try (BufferedReader lector= new BufferedReader(new FileReader(fichero))) {
+			int contador = 1;
+			String linea;
+		
+		
+			// si el fichero est� vac�o
+			if (!lector.ready()) {
+				throw new Exception("El fichero se encuentra vac�o");
+			}
+
+			while (lector.ready() && contador <= numLineas) {
+				linea = lector.readLine();
+				System.out.format("%n [%d]: %s", contador, linea);
+				contador++;
+			}
+			//no necesitamos cerrar el fichero
+		} catch (FileNotFoundException e) {
+			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
+
+		} catch (IllegalStateException e) {
+			System.out.println("El fichero est� cerrado");
+
+		} catch (Exception e) {
+			System.out.println("se ha producido el siguiente error: " + e.getMessage());
+		}
+
+	} // fin del ejercicio 3
+	
+	
+	
+	/**
+	 * Metodo que imprime las primeras líneas de un fichero de texto 
+	 * Resuelve el Ejercicio 3 de la Colecci�n 12
+	 * 
+	 * @param ruta cadena con la ruta completa -absoluta/relativa/ donde se ubica el fichero
+	 * @param numLineas  entero con el numero de lineas que queremos imprimir -debe ser positivo-
+	 */
+
 	public static void head(String ruta, int numLineas) {
 
 		// validamos lineas
@@ -77,21 +134,26 @@ public class UtilidadesFicheros {
 			return;
 		}
 
-		try (Scanner sc = new Scanner(fichero)) {
-			int contador = 1;
-			String linea;
-
+		try (BufferedReader lector= new BufferedReader(new FileReader(fichero))) {
+	
+			String linea;	
+		
 			// si el fichero est� vac�o
-			if (!sc.hasNext()) {
+			if (!lector.ready()) {
 				throw new Exception("El fichero se encuentra vac�o");
 			}
-
-			while (sc.hasNextLine() && contador <= numLineas) {
-				linea = sc.nextLine();
-				System.out.format("%n [%d]: %s", contador, linea);
-				contador++;
+			
+			for (int contador=1; contador<=numLineas;contador++) {
+				linea = lector.readLine();
+				if (linea==null) {
+					//hemos llegado al final del fichero...
+					break;
+				} else {
+					System.out.format("%n [%d]: %s", contador, linea);
+				}
 			}
-			sc.close();
+
+			//no necesitamos cerrar el fichero
 		} catch (FileNotFoundException e) {
 			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
 
@@ -124,6 +186,88 @@ public class UtilidadesFicheros {
 	 *  @param ruta cadena con la ruta completa -absoluta/relativa/ donde se ubica el fichero
 	 * @param numLineas  entero con el numero de lineas que queremos imprimir -debe ser positivo-
 	 */
+	public static void tail2(String ruta, int numLineas) {
+
+		// validamos lineas
+		if (numLineas <= 0) {
+			throw new IllegalArgumentException("El n�mero de l�neas debe ser mayor de 0");
+		}
+
+		// primero tratamos de abrir el manejador del fichero
+		File fichero;
+		try {
+			fichero = new File(ruta);
+		} catch (Exception e) {
+			// la ruta no es correcta o no existe el fichero.salimos del m�todo
+			return;
+		}
+		
+		
+		try (BufferedReader lector= new BufferedReader(new FileReader(fichero))) {
+	
+			
+			// definimos un LinkedList que gestionaremos como una cola donde guardaremos n líneas
+			LinkedList<String> lineas = new LinkedList<>();
+		
+			// si el fichero est� vac�o
+			if (!lector.ready()) {
+				throw new Exception("El fichero se encuentra vac�o");
+			}
+
+			while (lector.ready()) {
+				//agregamos la línea al final de la lista
+				lineas.add(lector.readLine());
+
+				if (lineas.size() > numLineas) {
+					// si ya hay numLineas l�neas en el fichero, se elimina y descarta la m�s antigua
+					lineas.pop();
+				}
+
+			
+			}
+
+			// al final se imprimen las numLineas �ltimas l�neas
+			int contador = 1;
+			for (String linea : lineas) {
+				System.out.format("%n [%d]: %s", contador++, linea);
+			}
+			//no necesitamos cerrar el fichero
+		} catch (FileNotFoundException e) {
+			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
+
+		} catch (IllegalStateException e) {
+			System.out.println("El fichero est� cerrado");
+
+		} catch (Exception e) {
+			System.out.println("se ha producido el siguiente error: " + e.getMessage());
+		}
+
+		try (Scanner sc = new Scanner(fichero);) {
+
+			
+
+
+
+		} catch (FileNotFoundException e) {
+			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
+
+		} catch (IllegalStateException e) {
+			System.out.println("El fichero est� cerrado");
+
+		} catch (Exception e) {
+			System.out.println("se ha producido el siguiente error: " + e.getMessage());
+		}
+
+	}
+	
+	
+	/**
+	 * Metodo que imprime las últimas líneas de un fichero de texto
+	 * Resuelve el Ejercicio 5, Coleccion 12
+	 *  
+	 *  @param ruta cadena con la ruta completa -absoluta/relativa/ donde se ubica el fichero
+	 * @param numLineas  entero con el numero de lineas que queremos imprimir -debe ser positivo-
+	 */
 	public static void tail(String ruta, int numLineas) {
 
 		// validamos lineas
@@ -139,31 +283,52 @@ public class UtilidadesFicheros {
 			// la ruta no es correcta o no existe el fichero.salimos del m�todo
 			return;
 		}
-
-		try (Scanner sc = new Scanner(fichero);) {
-
-			// definimos un arrayList donde guardamos las ultimas numLineas del fichero
-			ArrayList<String> lineas = new ArrayList<>();
-
+		
+		
+		try (BufferedReader lector= new BufferedReader(new FileReader(fichero))) {
+	
+			
+			// definimos un LinkedList que gestionaremos como una cola donde guardaremos numLineas
+			LinkedList<String> lineas = new LinkedList<>();
+		
 			// si el fichero est� vac�o
-			if (!sc.hasNext()) {
-				throw new Exception("El fichero se encuentra vacio");
+			if (!lector.ready()) {
+				throw new Exception("El fichero se encuentra vac�o");
 			}
-
-			while (sc.hasNextLine()) {
-				lineas.add(sc.nextLine());
+			String nuevaLinea;
+			while ((nuevaLinea=lector.readLine())!=null) {
+				//agregamos la línea al final de la lista
+				lineas.add(nuevaLinea);
 
 				if (lineas.size() > numLineas) {
-					// si ya hay numLineas l�neas en el fichero, se elimina la m�s antigua
-					lineas.remove(0);
+					// si ya hay numLineas  en el fichero, se elimina y descarta la m�s antigua
+					lineas.pop();
 				}
 
-			}
+			
+			}//fin del bucle while
+
 			// al final se imprimen las numLineas �ltimas l�neas
 			int contador = 1;
 			for (String linea : lineas) {
 				System.out.format("%n [%d]: %s", contador++, linea);
 			}
+			//no necesitamos cerrar el fichero
+		} catch (FileNotFoundException e) {
+			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
+
+		} catch (IllegalStateException e) {
+			System.out.println("El fichero est� cerrado");
+
+		} catch (Exception e) {
+			System.out.println("se ha producido el siguiente error: " + e.getMessage());
+		}
+
+		try (Scanner sc = new Scanner(fichero);) {
+
+			
+
+
 
 		} catch (FileNotFoundException e) {
 			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
