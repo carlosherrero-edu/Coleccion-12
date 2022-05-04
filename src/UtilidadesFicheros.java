@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Set;
@@ -87,7 +87,7 @@ public class UtilidadesFicheros {
 		
 			// si el fichero est� vac�o
 			if (!lector.ready()) {
-				throw new Exception("El fichero se encuentra vac�o");
+				throw new IOException("El fichero se encuentra vac�o");
 			}
 
 			while (lector.ready() && contador <= numLineas) {
@@ -99,10 +99,7 @@ public class UtilidadesFicheros {
 		} catch (FileNotFoundException e) {
 			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
 
-		} catch (IllegalStateException e) {
-			System.out.println("El fichero est� cerrado");
-
-		} catch (Exception e) {
+		} catch (IOException e) {
 			System.out.println("se ha producido el siguiente error: " + e.getMessage());
 		}
 
@@ -140,7 +137,7 @@ public class UtilidadesFicheros {
 		
 			// si el fichero est� vac�o
 			if (!lector.ready()) {
-				throw new Exception("El fichero se encuentra vac�o");
+				throw new IOException("El fichero se encuentra vacío o no se ha podido abrir ");
 			}
 			
 			for (int contador=1; contador<=numLineas;contador++) {
@@ -157,12 +154,11 @@ public class UtilidadesFicheros {
 		} catch (FileNotFoundException e) {
 			System.out.println("No es posible abrir el fichero por los siguientes motivos: " + e.getMessage());
 
-		} catch (IllegalStateException e) {
+		} catch (IOException e) {
 			System.out.println("El fichero est� cerrado");
 
-		} catch (Exception e) {
-			System.out.println("se ha producido el siguiente error: " + e.getMessage());
-		}
+		} 
+
 
 	} // fin del ejercicio 3
 

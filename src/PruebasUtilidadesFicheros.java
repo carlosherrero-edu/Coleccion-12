@@ -12,9 +12,9 @@ public class PruebasUtilidadesFicheros {
 		
 		//UtilidadesFicheros.imprimirLineasFichero(ruta+"/"+fich);
 		System.out.println();
-		UtilidadesFicheros.head(ruta+"/"+fich);
+		UtilidadesFicheros.head2(ruta+"/"+fich,20);
 		System.out.println();
-		UtilidadesFicheros.tail(ruta+"/"+fich);
+		//UtilidadesFicheros.tail(ruta+"/"+fich);
 		System.out.println();
 	
 		//UtilidadesFicheros.grep("gitano", new File(ruta));
