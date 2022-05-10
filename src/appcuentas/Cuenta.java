@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Cuenta implements Serializable {
 	
 	/**
-	 * Número de versión de la Clase
+	 * Nï¿½mero de versiï¿½n de la Clase
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +34,7 @@ public class Cuenta implements Serializable {
 		}
 	} //fin del construtor
 	
-	//constructor com parÃ¡metros, inicializando el saldo a cero
+	//constructor com parÃ¡metros, inicializando el saldo 
 		public Cuenta ( int numCuenta, String nombre, String apellidos, double saldo) {
 			try {
 				setNumCuenta(numCuenta);
@@ -88,7 +88,7 @@ public class Cuenta implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format(" Nombre: %s  %s  \t *Núm cuenta: %d \t *Saldo: %.2f ", 
+		return String.format(" Nombre: %s  %s  \t *Nï¿½m cuenta: %d \t *Saldo: %.2f ", 
 								getNombre(),getApellidos(), getNumCuenta(), getSaldo());
 	}
 	

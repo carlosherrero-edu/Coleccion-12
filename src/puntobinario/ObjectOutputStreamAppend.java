@@ -29,7 +29,7 @@ public class ObjectOutputStreamAppend extends ObjectOutputStream {
 	 */
 	@Override()
 	protected void writeStreamHeader() throws IOException{
-		//cuerpo vací, a fin de que no haga nada
+		; //no hace nada
 		
 	}
 
