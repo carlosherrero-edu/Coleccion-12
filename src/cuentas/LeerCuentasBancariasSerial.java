@@ -30,7 +30,7 @@ public class LeerCuentasBancariasSerial {
 		}
 
 		// instanciamos DataInputStream y recorremos el fichero
-		try (ObjectInputStream ois = new ObjectInputStream (new FileInputStream(RUTA))) {
+		try (ObjectInputStream ois = new ObjectInputStream (new FileInputStream(fichero))) {
 			
 	
 			
