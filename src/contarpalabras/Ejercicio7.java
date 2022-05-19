@@ -1,4 +1,4 @@
-package ejercicio9;
+package contarpalabras;
 
 
 import java.io.BufferedReader;
@@ -18,7 +18,7 @@ import java.util.TreeSet;
  * @author CArlos Herrero
  *
  */
-public class ContarPalabrasResuelto {
+public class Ejercicio7 {
 	
 	static final String PREFIJO="Dicc_";  //prefijo por el que comenzará el fichero con el diccionario
 
